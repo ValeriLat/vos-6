@@ -80,3 +80,25 @@ def hangman():
     if len(guess) != 1 or not guess.isalpha():
       print("Неверный ввод. Введите одну букву.")
       continue
+
+    if guess in alphabet - guessed_letters:
+      guessed_letters.add(guess)
+      if guess in letters_in_word:
+        letters_in_word.remove(guess)
+        print("")
+      else:
+        lives -= 1
+        print("Эта буква не входит в слово.")
+    elif guess in guessed_letters:
+      print("Вы уже угадали эту букву. Попробуйте другую.")
+    else:
+      print("Неверный ввод. Введите букву.")
+
+  if lives == 0:
+    print(display_hangman(lives))
+    print("Вы проиграли! Слово было:", word)
+  else:
+    print("Поздравляем! Вы угадали слово:", word)
+
+
+hangman()
